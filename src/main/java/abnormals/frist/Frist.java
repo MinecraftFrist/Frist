@@ -1,10 +1,13 @@
 package abnormals.frist;
 
+import abnormals.frist.common.debug.command.FristTeleportCommand;
+import abnormals.frist.common.init.ModDimensions;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 @Mod(
         modid = Frist.MODID,
@@ -24,7 +27,7 @@ public class Frist {
 
     @Mod.EventHandler
     public void preinit(FMLPreInitializationEvent event) {
-
+        ModDimensions.registerDimensions();
     }
 
     @Mod.EventHandler
@@ -35,5 +38,10 @@ public class Frist {
     @Mod.EventHandler
     public void postinit(FMLPostInitializationEvent event) {
 
+    }
+
+    @Mod.EventHandler
+    public void serverStarting(FMLServerStartingEvent event){
+        event.registerServerCommand(new FristTeleportCommand());
     }
 }
