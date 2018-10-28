@@ -1,7 +1,10 @@
 package abnormals.frist;
 
 import abnormals.frist.common.debug.command.FristTeleportCommand;
+import abnormals.frist.common.init.ModBlocks;
 import abnormals.frist.common.init.ModDimensions;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -18,6 +21,13 @@ public class Frist {
     public static final String MODID = "frist";
     public static final String MOD_NAME = "Frist";
     public static final String VERSION = "0.0.1";
+
+    public static final CreativeTabs FRIST_TAB = new CreativeTabs(MODID){
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(ModBlocks.BLUE_FRISTUM);
+        }
+    };
 
     @Mod.Instance(MODID)
     public static Frist INSTANCE;
