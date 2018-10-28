@@ -12,6 +12,7 @@ import java.util.List;
 
 public class ChunkGeneratorFrist implements IChunkGenerator {
     World world;
+    Biome[] biomeBufferArray;
 
     public ChunkGeneratorFrist(World world){
         this.world=world;
@@ -19,7 +20,15 @@ public class ChunkGeneratorFrist implements IChunkGenerator {
 
     @Override
     public Chunk generateChunk(int x, int z) {
-        return new Chunk(world,x,z);
+        int globalCoordX = x<<4;
+        int globalCoordZ = z<<4;
+        Chunk chunk =  new Chunk(world,x,z);
+        this.biomeBufferArray =world.getBiomeProvider().getBiomes(this.biomeBufferArray,globalCoordX,globalCoordZ,16,16);
+        byte[] chunkBiomeByteArray = chunk.getBiomeArray();
+        for(int i = 0; i<chunkBiomeByteArray.length;i++){
+            chunkBiomeByteArray[i] =(byte)Biome.getIdForBiome(biomeBufferArray[i]);
+        }
+        return chunk;
     }
 
     @Override
